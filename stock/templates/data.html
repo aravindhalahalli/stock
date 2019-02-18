@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+    <head>   <title>Stock App</title>
+ 
+    
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+        <link href="{{ url_for('static',filename='style.css') }}" rel="stylesheet">
+    
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>\
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        
+        
+         <link rel="stylesheet" type="text/css" href="https://rawgit.com/gionkunz/chartist-js/master/dist/chartist.min.css">
+        
+        <style>
+            table, th, td {
+    border: 1px solid black;
+}
+            #chart {
+                height: 300px;
+                width: 100%;
+            }
+        </style>
+</head>
+<body>
+    
+        <div class="container">
+      <div class="header" style="width: 50%;margin: auto" >
+        <h3 class="text-muted">Stock info system</h3>
+      </div>
+ 
+      <div class="jumbotron" style="width: 50%;margin: auto">
+<!--
+
+          {% for i in d[0] %}
+      <h2>{{ i }} </h2>
+  {% endfor %}
+-->
+          <h1>{{d[0][1]}}</h1>
+          <h3>Found:{{d[0][2]}}</h3>    
+          <h3>Domain:{{d[0][3]}}</h3>
+          <h3>52 WK High:{{d[0][4]}}</h3>
+          <h3>52 WK Low:{{d[0][5]}}</h3>
+            </div>
+    </div>
+    
+<!--
+    <canvas id="chart" width="600" height="400"></canvas>
+    <script>
+ 
+   // bar chart data
+   var barData = {
+   labels : [{% for item in X %}
+                  "{{item}}",
+              {% endfor %}],
+   datasets : [
+      {
+            data : [{% for item in Y %}
+                      {{item}},
+                    {% endfor %}]
+      }]
+   }
+ 
+    Chart.defaults.global.animationSteps = 50;
+    Chart.defaults.global.tooltipYPadding = 16;
+    Chart.defaults.global.tooltipCornerRadius = 0;
+    Chart.defaults.global.tooltipTitleFontStyle = "normal";
+    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+    Chart.defaults.global.animationEasing = "easeOutBounce";
+    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.scaleLineColor = "black";
+    Chart.defaults.global.scaleFontSize = 16;
+ 
+   // get bar chart canvas
+   var mychart = document.getElementById("chart").getContext("2d");
+ 
+   // draw bar chart
+   var LineChartDemo = new Chart(mychart).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+ 
+   });
+ 
+ 
+</script>
+    
+-->
+    
+    <div class="ct-chart" id="chart" style="padding: 3%"></div>
+
+        <script type="text/javascript" src="https://rawgit.com/gionkunz/chartist-js/master/dist/chartist.js"></script>
+        
+        <script>
+        
+        new Chartist.Line('#chart', {
+          labels: [{% for item in X %}
+                  "{{item}}",
+              {% endfor %}],
+          series: [
+[{% for item in Y %}
+                      {{item}},
+                    {% endfor %}]          ]
+        }, {
+          low: 0,
+          showArea: true
+        });
+        </script>
+      <div class="jumbotron" style="width: 50%;margin: auto">
+<table style="width: 100%">
+    <tr>
+    <th>
+        Year
+    </th>
+        <th>Stock Price</th>
+    </tr>
+    {% for i, j in t %}
+          <tr><td>{{ i }}   </td><td>   {{ j }}</td></tr>
+    {% endfor %} </table>   </div>
+    
+  <div class="jumbotron" style="width: 50%;margin: auto">
+
+      <h2>Predicted values</h2>
+      <br><br>
+      <table style="width: 100%">
+    <tr>
+    <th>
+        Year
+    </th>
+        <th>Stock Price</th>
+    </tr>
+          <tr>
+          <td>2018-01-01</td>
+              <td>{{p[0]}}</td>
+          </tr>
+                    <tr>
+          <td>2018-02-01</td>
+              <td>{{p[1]}}</td>
+          </tr>
+                    <tr>
+          <td>2018-03-01</td>
+              <td>{{p[2]}}</td>
+          </tr>
+                    <tr>
+          <td>2018-04-01</td>
+              <td>{{p[3]}}</td>
+          </tr>
+                    <tr>
+          <td>2018-05-01</td>
+              <td>{{p[4]}}</td>
+          </tr>
+                    <tr>
+          <td>2018-06-01</td>
+              <td>{{p[5]}}</td>
+          </tr>
+     </table>
+    
+    
+    </div> 
+      <div class="ct-chart" id="chart1" style="padding: 3%"></div>
+      <script type="text/javascript" src="https://rawgit.com/gionkunz/chartist-js/master/dist/chartist.js"></script>
+        
+        <script>
+        
+        new Chartist.Line('#chart1', {
+          labels: ['2018-01-01','2018-02-01','2018-03-01','2018-04-01','2018-05-01','2018-06-01'],
+          series: [
+[{% for item in p %}
+                      {{item}},
+                    {% endfor %}]          ]
+        }, {
+            
+          low: 0,
+          showArea: true
+        });
+        </script>
+       
+    
+    </body>
+</html>
+    

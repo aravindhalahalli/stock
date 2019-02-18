@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>   <title>Stock App</title>
+ 
+    
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+        <link href="{{ url_for('static',filename='style.css') }}" rel="stylesheet">
+    
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+<body>
+    <div class="container">
+        <h3 class="text-muted">Stock info system</h3>
+        <div class="jumbotron" style="width: 50%;margin: auto">
+        <h1 id="sp">Select a company</h1>
+            <form action="{{ url_for('company')}}" method="POST">
+            <select name="company" style="margin: 20px ">
+                <option >Select</option>
+                <option value="1">TCS</option>
+                <option value="2">Infosys</option>
+                <option value="3">Reliance Ind.</option>
+                            </select>
+                <button type="submit" id="btnSignUp" class="btn btn-lg btn-primary btn-block"  >Go</button></form>            
+            </div>
+    </div>    
+</body>
+</html>
